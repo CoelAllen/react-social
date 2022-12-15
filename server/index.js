@@ -9,8 +9,9 @@ const authRoute = require("./routes/auth");
 
 dotenv.config();
 mongoose.set("strictQuery", true);
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
-  console.log("connected to mongo");
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, (err) => {
+  if (err) console.log(err);
+  else console.log("connected to mongo");
 });
 
 app.use(express.json());
