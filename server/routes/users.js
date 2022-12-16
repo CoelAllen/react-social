@@ -3,7 +3,8 @@ const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 
 router.put("/:id", async (req, res) => {
-  if (req.body.userId === req.params.id || req.user.isAdmin) {
+  const user = await User.findById(req.params.id);
+  if (req.body.userId === req.params.id || user?.isAdmin) {
     if (req.body.password) {
       try {
         const salt = await bcrypt.genSalt(10);
