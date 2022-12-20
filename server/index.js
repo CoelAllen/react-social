@@ -9,12 +9,14 @@ const authRoute = require("./routes/auth");
 
 dotenv.config();
 mongoose.set("strictQuery", true);
+// @ts-ignore
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, (err) => {
   if (err) console.log(err);
   else console.log("connected to mongo");
 });
 
 app.use(express.json());
+// @ts-ignore
 app.use(helmet());
 app.use(morgan("common"));
 

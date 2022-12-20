@@ -2,6 +2,8 @@ const router = require("express").Router();
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 
+// Edit user
+
 router.put("/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
   if (req.body.userId === req.params.id || user?.isAdmin) {
@@ -25,6 +27,9 @@ router.put("/:id", async (req, res) => {
     return res.status(403).json("You cannot update this account");
   }
 });
+
+// Delete User
+
 router.delete("/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
   if (req.body.userId === req.params.id || user?.isAdmin) {
@@ -38,6 +43,9 @@ router.delete("/:id", async (req, res) => {
     return res.status(403).json("You can only delete your own account!");
   }
 });
+
+// Get User by Id
+
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
